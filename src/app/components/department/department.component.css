@@ -1,0 +1,10 @@
+.form-heading{
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+.card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+    width: 45rem;
+}

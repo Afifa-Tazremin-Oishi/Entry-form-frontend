@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="form-heading text-center">
+        <h4>Department Entry Form</h4>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <app-add-department></app-add-department>
+            <br>
+            <div class="content">
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Code</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Department</th>
+                        <th scope="col" class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr >
+                       <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+
+                        <td class="text-center">
+                            <app-edit-department></app-edit-department>&nbsp;&nbsp;
+                            
+                              <button  class="btn btn-danger">Delete</button>
+                          </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            
+        </div>
+    </div>
+</div>

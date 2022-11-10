@@ -1,0 +1,42 @@
+<button type="button" class="btn btn-primary" (click)="openPopup()">Edit</button>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Department</h5>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editDepartmentForm" (ngSubmit)="submitAction()">
+            <div class="row">
+                <div class="col-3">
+                    <label class="required">Name</label>
+                </div>
+                <div class="col-9">
+                    <input type="text" formControlName="name" class="form-control" placeholder="Name">
+                </div>
+            </div><br>
+            <div class="row"><div class="col-3">
+                    <label class="required">Department</label>
+                </div>
+                <div class="col-9">
+                        <select class="form-select" formControlName="department">
+                            <option [selected]="true">Select Department</option>
+                            <option>HRDept</option>
+                            <option>Designation</option>
+                            <option>Staff</option>
+                          </select>
+                </div>
+            </div><br>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+  
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
