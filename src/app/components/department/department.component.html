@@ -5,7 +5,45 @@
 
     <div class="card">
         <div class="card-body">
-            <app-add-department></app-add-department>
+          <h5>Department Entry</h5>
+          <form [formGroup]="addDepartmentForm" (ngSubmit)="submitAction()">
+              <div class="row" style="margin-top: 2rem;">
+                  <div class="col-2">
+                      <label class="">Code:</label>
+                  </div>
+                  <div class="col-4">
+                        <input type="number" formControlName="code" class="form-control" placeholder="Code">
+                  </div>
+                  <div class="col-2"></div>
+                  <div class="col-4">
+                      <label class="">Add Department</label>
+                      <select class="form-select" formControlName="dept" 
+                      (change)="selectChangeHandler($event)">
+                          <option [selected]="true">Select Department</option>
+                          <option value="HRDept">HRDept</option>
+                          <option value="Designation">Designation</option>
+                          <option value="Staff">Staff</option>
+                        </select>
+                  </div>
+              </div>
+              <div class="row" style="margin-top: 1rem;">
+                  <div class="col-2">
+                      <label class="">Name:</label>
+                  </div>
+                  <div class="col-5">
+                      <input type="text" formControlName="name" class="form-control" placeholder="Name">
+                  </div>
+                  <div class="col-5"></div>
+              </div>
+              <div class="row" style="margin-top: 1rem;">
+                  <div class="col"></div>
+                  <div class="col">
+                      <button type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;
+                      <button type="button" class="btn btn-primary">Show</button>
+                  </div>
+                  <div class="col"></div>
+              </div>
+          </form>
             <br>
             <div class="content">
                 <table class="table table-bordered">
@@ -18,13 +56,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr >
-                       <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
+                      <tr *ngFor="let item of empList">
+                       <th scope="row">{{item.code}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.dept}}</td>
 
                         <td class="text-center">
-                            <app-edit-department></app-edit-department>&nbsp;&nbsp;
+                          <button type="button" class="btn btn-primary" (click)="openPopup()">Edit</button>
                             
                               <button  class="btn btn-danger">Delete</button>
                           </td>
@@ -36,3 +74,44 @@
         </div>
     </div>
 </div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Department</h5>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editDepartmentForm" (ngSubmit)="updateMenu()">
+              <div class="row">
+                  <div class="col-3">
+                      <label class="required">Name</label>
+                  </div>
+                  <div class="col-9">
+                      <input type="text" formControlName="name" class="form-control" placeholder="Name">
+                  </div>
+              </div><br>
+              <div class="row"><div class="col-3">
+                      <label class="required">Department</label>
+                  </div>
+                  <div class="col-9">
+                          <select class="form-select" formControlName="dept" (change)="selectChangeHandler($event)">
+                              <option [selected]="true">Select Department</option>
+                              <option>HRDept</option>
+                              <option>Designation</option>
+                              <option>Staff</option>
+                            </select>
+                  </div>
+              </div><br>
+              <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+          </form>
+    
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closePopup()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
