@@ -13,28 +13,36 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class DepartmentComponent implements OnInit {
   empList: any;
-  selectedDay: any
+  selectedDay: any;
+  //code: number;
   data: any = null;
 
   displayStyle = "none";
-  
-  openPopup() {
+
+  openPopup(item: any) {
     this.displayStyle = "block";
+    this.data = item;
+    this.editDepartmentForm.patchValue({
+      submenu_name: this.data?.submenu_name
+    });
   }
   closePopup() {
     this.displayStyle = "none";
+    this.data = null;
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private service: ServiceService){ }
+  constructor(private http: HttpClient, 
+    private fb: FormBuilder, 
+    private service: ServiceService) { }
 
   ngOnInit(): void {
     this.getAll();
   }
 
   addDepartmentForm: FormGroup = this.fb.group({
-    code: ['', [Validators.required]],
-    dept: ['', [Validators.required]],
-    name: ['', [Validators.required]],
+    code: [null, [Validators.required]],
+    dept: [null, [Validators.required]],
+    name: [null, [Validators.required]],
   });
 
   editDepartmentForm: FormGroup = this.fb.group({
@@ -70,14 +78,16 @@ export class DepartmentComponent implements OnInit {
   //     Swal.fire('Error', 'Please Input Valid Data', 'error')
   //   }
   // }
-  
+
 
   updateMenu() {
-    this.data.code = this.editDepartmentForm?.value?.code;
+    this.data.dept = this.editDepartmentForm?.value?.dept;
+    this.data.name = this.editDepartmentForm?.value?.name;
     if (this.editDepartmentForm.valid) {
       this.service.updateDept(this.data)
         .subscribe(
           res => {
+            console.log(res);
             Swal.fire('Success', 'Successfully Updated', 'success');
             this.getAll();
           },
@@ -91,13 +101,14 @@ export class DepartmentComponent implements OnInit {
       this.getAll();
     }
   }
-  selectChangeHandler (event: any) {
+
+  selectChangeHandler(event: any) {
     //update the ui
     this.selectedDay = event.target.value;
     console.log(event.target.value);
   }
-  
-  getAll(){
+
+  getAll() {
     this.service.getAlldept().subscribe((res: any) => {
       console.log(res);
       this.empList = res.payload.output;

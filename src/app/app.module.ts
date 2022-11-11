@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddDepartmentComponent } from './components/add-department/add-department.component';
 import { DepartmentComponent } from './components/department/department.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 import { DeleteDepartmentComponent } from './components/delete-department/delete-department.component';
@@ -13,7 +12,6 @@ import { DeleteDepartmentComponent } from './components/delete-department/delete
 @NgModule({
   declarations: [
     AppComponent,
-    AddDepartmentComponent,
     DepartmentComponent,
     EditDepartmentComponent,
     DeleteDepartmentComponent
